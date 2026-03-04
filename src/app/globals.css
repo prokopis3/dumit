@@ -15,11 +15,23 @@
 }
 
 @layer components {
+  /* Glass card with graceful fallback for browsers without backdrop-filter */
   .glass-card {
-    @apply rounded-[28px] border border-white/12 bg-white/8 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-xl;
+    @apply rounded-[28px] border border-white/12 shadow-glass-lg bg-black/32;
     background-image:
       radial-gradient(circle at 0% 0%, rgba(167, 243, 208, 0.07), transparent 44%),
       radial-gradient(circle at 100% 100%, rgba(125, 211, 252, 0.06), transparent 42%);
+    /* lightweight fallback color to avoid heavy repaints on low-end devices */
+    background-color: rgba(255,255,255,0.02);
+  }
+
+  /* Only apply expensive backdrop-filter where supported */
+  @supports ((-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))) {
+    .glass-card {
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      background-color: rgba(255,255,255,0.06);
+    }
   }
 
   .neon-focus {
@@ -180,5 +192,41 @@
     background-image: url("/hero-bg.svg");
     background-size: cover;
     background-position: center;
+  }
+
+  /* Performance helpers */
+  .use-gpu {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .fast-transform {
+    transition: transform 180ms cubic-bezier(.2,.9,.2,1), opacity 160ms ease-out;
+    will-change: transform, opacity;
+  }
+
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 100px 20px;
+  }
+
+  /* Reduce heavy blur on small screens to avoid repaint/latency */
+  @media (max-width: 640px) {
+    .glass-card {
+      backdrop-filter: blur(8px) !important;
+    }
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .material-btn,
+    .feature-card,
+    .glass-card,
+    .motion-safe {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 }

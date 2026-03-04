@@ -2121,7 +2121,7 @@ export default function DomainSearch() {
 
               {(loading || results.length > 0 || recentMemories.length > 0) && (
                 <section className="relative z-10 grid gap-4 lg:grid-cols-[1fr_320px]">
-                  <div className="space-y-3">
+                  <div className="space-y-3 content-auto use-gpu">
                     {loading && (
                       <div className="glass-card p-4">
                         <div className="mb-2 flex items-center gap-2 text-emerald-200">

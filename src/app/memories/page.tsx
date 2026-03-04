@@ -120,7 +120,7 @@ export default function MemoriesPage() {
           ) : memories.length === 0 ? (
             <div className="glass-card p-5 text-sm text-white/70">No saved memories found.</div>
           ) : (
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="grid gap-3 md:grid-cols-2 content-auto use-gpu fast-transform">
               {memories.map((memory) => {
                 const provider = memory.providerUsage?.providerUsed ?? memory.providerOrder?.[0] ?? "groq";
 
