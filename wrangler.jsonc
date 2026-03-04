@@ -1,0 +1,73 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "dumit",
+	"compatibility_date": "2025-01-15",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": "worker/index.ts",
+	"kv_namespaces": [
+		{
+			"binding": "MY_KV_NAMESPACE",
+			"id": "9ea1e34e7a3242a89ca483337c397153",
+			"preview_id": "0201210f48e0477ba00ecad0d4249993"
+		}
+	],
+	"assets": {
+		"directory": "./dist/client",
+		"not_found_handling": "none",
+		"binding": "ASSETS"
+	},
+	"images": {
+		"binding": "IMAGES"
+	},
+	"vars": {
+		"ENABLE_RDAP_FALLBACK": "true",
+		"GROQ_MODEL": "llama-3.1-8b-instant",
+		"OPENAI_MODEL": "gpt-4.1-mini",
+		"XAI_MODEL": "grok-3-mini",
+		"GEMINI_MODEL": "gemini-2.0-flash",
+		"HUGGINGFACE_MODEL": "meta-llama/Llama-3.1-8B-Instruct",
+		"MILVUS_COLLECTION": "domain_vectors",
+		"MILVUS_VECTOR_FIELD": "embedding",
+		"MILVUS_VECTOR_DIM": "8",
+		"GEMINI_EMBEDDING_MODEL": "text-embedding-004",
+		"OPENAI_EMBEDDING_MODEL": "text-embedding-3-small",
+		"DOMAIN_SUGGEST_COUNT": "12",
+		"DOMAIN_SUGGEST_MAX": "24"
+	},
+	// "secrets": {
+	// 	"required": [
+	// 		"ANTHROPIC_API_KEY",
+	// 		"GEMINI_API_KEY",
+	// 		"GROQ_API_KEY",
+	// 		"MILVUS_ENDPOINT",
+	// 		"MILVUS_TOKEN",
+	// 		"NODE_ENV",
+	// 		"OPENAI_API_KEY",
+	// 		"SUPABASE_ANON_KEY",
+	// 		"SUPABASE_URL",
+	// 		"UPSTASH_REDIS_REST_TOKEN",
+	// 		"UPSTASH_REDIS_REST_URL",
+	// 		"XAI_API_KEY"
+	// 	]
+	// },
+	
+	// Configure these with `wrangler secret put <KEY>`:
+	// GROQ_API_KEY
+	// GEMINI_API_KEY
+	// OPENAI_API_KEY
+	// XAI_API_KEY
+	// HUGGINGFACE_API_KEY
+	// UPSTASH_REDIS_REST_URL
+	// UPSTASH_REDIS_REST_TOKEN
+	// SUPABASE_URL
+	// SUPABASE_ANON_KEY
+	// SUPABASE_SERVICE_ROLE_KEY
+	// MILVUS_ENDPOINT
+	// MILVUS_TOKEN
+	// CLOUDFLARE_API_TOKEN (required for --experimental-tpr)
+	"observability": {
+		"enabled": true
+	}
+}

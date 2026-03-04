@@ -1,0 +1,21 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#040708"/>
+  <g filter="url(#blur1)">
+    <circle cx="320" cy="220" r="240" fill="#4E7A61" fill-opacity="0.24"/>
+    <circle cx="1260" cy="220" r="190" fill="#2F4A3A" fill-opacity="0.2"/>
+    <circle cx="1250" cy="760" r="280" fill="#2E3E51" fill-opacity="0.16"/>
+    <circle cx="380" cy="760" r="220" fill="#2A4438" fill-opacity="0.15"/>
+  </g>
+  <path d="M0 810C180 730 370 720 560 780C740 840 930 870 1130 770C1290 690 1440 690 1600 770V1000H0V810Z" fill="url(#grad1)" fill-opacity="0.48"/>
+  <defs>
+    <filter id="blur1" x="-120" y="-200" width="1960" height="1400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="90" result="effect1_foregroundBlur"/>
+    </filter>
+    <linearGradient id="grad1" x1="800" y1="700" x2="800" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1411" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#020505" stop-opacity="0.88"/>
+    </linearGradient>
+  </defs>
+</svg>

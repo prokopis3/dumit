@@ -1,26 +1,184 @@
-@import "tailwindcss";
+@import "tailwindcss/index.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-pastel-blue: #9fb4bd;
+  --color-pastel-green: #7ca881;
+  --color-soft-red: #ff7c75;
+  --color-deep-blue: #09121b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply min-h-screen bg-linear-to-br from-[#070b0a] via-[#0b1311] to-[#070809] text-white antialiased;
+    background-attachment: fixed;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .glass-card {
+    @apply rounded-[28px] border border-white/12 bg-white/8 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-xl;
+    background-image:
+      radial-gradient(circle at 0% 0%, rgba(167, 243, 208, 0.07), transparent 44%),
+      radial-gradient(circle at 100% 100%, rgba(125, 211, 252, 0.06), transparent 42%);
+  }
+
+  .neon-focus {
+    @apply transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300/40;
+  }
+
+  .material-field {
+    @apply relative flex flex-col gap-1 rounded-[20px] border border-white/12 bg-black/38 px-4 pb-3 pt-2.5 transition-all;
+  }
+
+  .material-field:focus-within {
+    @apply border-emerald-300/45 bg-black/58 shadow-[0_0_0_1px_rgba(110,231,183,0.35),0_12px_36px_rgba(6,18,13,0.45)];
+  }
+
+  .material-label {
+    @apply text-[11px] uppercase tracking-[0.14em] text-white/55;
+  }
+
+  .material-input {
+    @apply w-full bg-transparent text-sm text-white placeholder-white/35 focus:outline-none;
+  }
+
+  .material-bar {
+    @apply mt-1 h-px w-full bg-linear-to-r from-emerald-400/45 via-teal-300/30 to-white/5;
+  }
+
+  .material-btn {
+    @apply relative inline-flex items-center gap-2 overflow-hidden rounded-[18px] border border-white/20 bg-black/45 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-250 active:scale-[0.985] hover:-translate-y-0.5 hover:border-emerald-300/45 hover:bg-black/62 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/45;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 10px 24px rgba(6, 14, 11, 0.35);
+  }
+
+  .material-btn::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(130deg, rgba(167, 243, 208, 0.2), rgba(125, 211, 252, 0.14), rgba(196, 181, 253, 0.12));
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+  }
+
+  .material-btn:hover::before,
+  .material-btn:focus-visible::before {
+    opacity: 1;
+  }
+
+  .material-btn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%) scale(1);
+    background: radial-gradient(circle, rgba(167, 243, 208, 0.34) 0%, rgba(167, 243, 208, 0) 70%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .material-btn:active::after {
+    animation: material-ripple 550ms ease-out;
+  }
+
+  @keyframes material-ripple {
+    0% {
+      opacity: 0.55;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(44);
+    }
+  }
+
+  .top-nav-btn {
+    @apply inline-flex items-center gap-1.5 rounded-2xl border border-transparent px-3 py-1.5 text-xs text-white/75 transition-all duration-200 hover:bg-white/5;
+  }
+
+  .top-nav-btn-active {
+    @apply border-emerald-300/30 bg-emerald-500/12 text-emerald-50 shadow-[0_0_0_1px_rgba(110,231,183,0.25)];
+  }
+
+  .feature-card {
+    @apply rounded-[22px] border border-white/12 bg-black/35 p-4 transition-all duration-250 hover:bg-black/45;
+    background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  }
+
+  .feature-title {
+    @apply text-xs uppercase tracking-[0.14em] text-emerald-100/80;
+  }
+
+  .feature-text {
+    @apply mt-2 text-sm text-white/75;
+  }
+
+  .tone-emerald {
+    @apply border-emerald-300/25;
+    background-image:
+      radial-gradient(circle at 10% 0%, rgba(52, 211, 153, 0.16), transparent 45%),
+      linear-gradient(160deg, rgba(16, 44, 35, 0.35), rgba(3, 8, 7, 0.14));
+  }
+
+  .tone-cyan {
+    @apply border-cyan-300/25;
+    background-image:
+      radial-gradient(circle at 90% 10%, rgba(34, 211, 238, 0.16), transparent 45%),
+      linear-gradient(160deg, rgba(11, 34, 43, 0.35), rgba(3, 8, 9, 0.12));
+  }
+
+  .tone-violet {
+    @apply border-violet-300/25;
+    background-image:
+      radial-gradient(circle at 18% 8%, rgba(167, 139, 250, 0.18), transparent 45%),
+      linear-gradient(160deg, rgba(27, 18, 49, 0.35), rgba(6, 5, 11, 0.12));
+  }
+
+  .tone-amber {
+    @apply border-amber-300/25;
+    background-image:
+      radial-gradient(circle at 85% 0%, rgba(251, 191, 36, 0.17), transparent 46%),
+      linear-gradient(160deg, rgba(43, 30, 12, 0.33), rgba(10, 8, 5, 0.12));
+  }
+
+  .tone-mix {
+    @apply border-fuchsia-300/20;
+    background-image:
+      radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.14), transparent 42%),
+      radial-gradient(circle at 100% 0%, rgba(167, 139, 250, 0.14), transparent 42%),
+      radial-gradient(circle at 50% 100%, rgba(52, 211, 153, 0.16), transparent 50%),
+      linear-gradient(165deg, rgba(8, 13, 18, 0.38), rgba(8, 10, 13, 0.2));
+  }
+}
+
+@layer utilities {
+  .mesh-bg {
+    background-image:
+      radial-gradient(circle at 12% 16%, rgba(164, 194, 170, 0.12), transparent 28%),
+      radial-gradient(circle at 86% 2%, rgba(112, 164, 125, 0.12), transparent 30%),
+      radial-gradient(circle at 70% 74%, rgba(109, 118, 166, 0.08), transparent 40%);
+  }
+
+  .bg-app-hero {
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(73, 107, 83, 0.22), transparent 35%),
+      radial-gradient(circle at 85% 0%, rgba(54, 83, 65, 0.18), transparent 34%),
+      linear-gradient(180deg, rgba(4, 9, 8, 0.9), rgba(4, 8, 7, 0.97)),
+      url("/hero-bg.svg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .bg-landing-hero {
+    background-image: url("/hero-bg.svg");
+    background-size: cover;
+    background-position: center;
+  }
 }
