@@ -2092,10 +2092,12 @@ export default function DomainSearch() {
                     whileHover={{ y: -3, scale: 1.01 }}
                     whileTap={{ scale: 0.995 }}
                     transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                    className={cn("feature-card", pickPaletteTone(index, 1))}
+                    className={cn(pickPaletteTone(index, 1))}
                   >
-                    <p className="feature-title">{card.title}</p>
-                    <p className="feature-text">{card.description}</p>
+                    <GlassCard className="feature-card">
+                      <p className="feature-title">{card.title}</p>
+                      <p className="feature-text">{card.description}</p>
+                    </GlassCard>
                   </MotionWrapper>
                 ))}
               </section>
